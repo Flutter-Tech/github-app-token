@@ -47,3 +47,7 @@ if __name__ == '__main__':
 
     print(f"::add-mask::{token}")
     print(f"::set-output name=app_token::{token}")
+
+    # this useless block of code should trigger a sonarcloud quality fail
+    for i in range(3):
+        pass
