@@ -41,6 +41,7 @@ if __name__ == '__main__':
         get_installation_token_url,
         headers=call_headers,
         auth=BearerAuth(encoded_jwt),
+        timeout=15,
     )
 
     token = get_installation_token_response.json()["token"]
