@@ -22,18 +22,18 @@ const auth = new createAppAuth({
   installationId: core.getInput('APP_INSTALLATION_ID')
 });
 
-// Create auth promise
-const authPromise = auth({
-  type: "app"
-})
-
-const promises = [authPromise];
+const promises = [];
 
 // Setup timeout promise if the time value is greater than 0
 if (timeout > 0) {
   const timeoutPromise = new Promise((resolve, reject) => setTimeout(reject, timeout));
   promises.push(timeoutPromise);
 }
+
+// Create auth promise
+promises.push(auth({
+  type: "app"
+}))
 
 // Race timeout and auth promises 
 Promise.race(promises).then((res, err) => {
