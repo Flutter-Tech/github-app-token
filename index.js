@@ -26,7 +26,7 @@ const promises = [];
 
 // Setup timeout promise if the time value is greater than 0
 if (timeout > 0) {
-  const timeoutPromise = new Promise((resolve, reject) => setTimeout(reject, timeout));
+  const timeoutPromise = new Promise((resolve, reject) => setTimeout(()=>{reject(new Error("Timeout reached"))}, timeout));
   promises.push(timeoutPromise);
 }
 
@@ -35,7 +35,7 @@ promises.push(auth({
   type: "app"
 }))
 
-// Race timeout and auth promises 
+// Race timeout and auth promises
 Promise.race(promises).then((res, err) => {
   if (err) return core.setFailed(err.message);
 
