@@ -14786,6 +14786,7 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(2186);
 const { createAppAuth } = __nccwpck_require__(7541);
+const { request } = __nccwpck_require__(6234);
 
 // Set defaul input to 30 seconds
 let timeout = 30000;
@@ -14805,28 +14806,22 @@ if (inputTimeout) {
 const auth = new createAppAuth({
   appId: core.getInput('APP_ID'),
   privateKey: core.getInput('APP_PEM'),
-  installationId: core.getInput('APP_INSTALLATION_ID')
+  installationId: core.getInput('APP_INSTALLATION_ID'),
+  // https://github.com/octokit/request.js#request
+  request: request.defaults({
+    request: {
+      timeout
+    }
+  })
 });
 
-const promises = [];
-
-// Setup timeout promise if the time value is greater than 0
-if (timeout > 0) {
-  const timeoutPromise = new Promise((resolve, reject) => setTimeout(()=>{reject(new Error("Timeout reached"))}, timeout));
-  promises.push(timeoutPromise);
-}
-
-// Create auth promise
-promises.push(auth({
+auth({
   type: "app"
-}))
-
-// Race timeout and auth promises
-Promise.race(promises).then((res, err) => {
+}).then((res, err) => {
   if (err) return core.setFailed(err.message);
 
   return core.setOutput("app_token", res.token);
-});
+})
 
 })();
 

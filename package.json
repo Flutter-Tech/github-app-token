@@ -21,7 +21,8 @@
   "homepage": "https://github.com/Flutter-Tech/github-app-token#readme",
   "dependencies": {
     "@actions/core": "^1.9.0",
-    "@octokit/auth-app": "^4.0.4"
+    "@octokit/auth-app": "^4.0.4",
+    "@octokit/request": "^6.2.0"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.34.0"
