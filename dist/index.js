@@ -18807,7 +18807,9 @@ const auth = new createAppAuth({
   installationId: core.getInput('APP_INSTALLATION_ID')
 });
 
-auth.then((res, err) => {
+auth({
+  type: "app"
+}).then((res, err) => {
   if (err) return core.setFailed(err.message);
   console.log(res);
   return core.setOutput("app_token", res.token);
