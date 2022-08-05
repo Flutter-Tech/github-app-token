@@ -1,7 +1,20 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
 const { createAppAuth } = require("@octokit/auth-app");
 
+// Set defaul input to 30 seconds
+let timeout = 30000;
+
+// Set the timeout value if an input was received
+const inputTimeout = core.getInput('timeout');
+if (inputTimeout) {
+  const value = Number(inputTimeout)
+
+  if (value === NaN || value < 0) {
+    return core.setFailed("Timeout must be a number greater than or equal to 0");
+  }
+
+  timeout = value * 1000;
+}
 
 const auth = new createAppAuth({
   appId: core.getInput('APP_ID'),
@@ -9,10 +22,22 @@ const auth = new createAppAuth({
   installationId: core.getInput('APP_INSTALLATION_ID')
 });
 
-auth({
+// Create auth promise
+const authPromise = auth({
   type: "app"
-}).then((res, err) => {
+})
+
+const promises = [authPromise];
+
+// Setup timeout promise if the time value is greater than 0
+if (timeout > 0) {
+  const timeoutPromise = new Promise((resolve, reject) => setTimeout(reject, timeout));
+  promises.push(timeoutPromise);
+}
+
+// Race timeout and auth promises 
+Promise.race(promises).then((res, err) => {
   if (err) return core.setFailed(err.message);
-  console.log(res);
+
   return core.setOutput("app_token", res.token);
 });

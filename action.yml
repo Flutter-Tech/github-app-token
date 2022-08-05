@@ -12,7 +12,7 @@ inputs:
     description: GitHub App installation ID.
     required: true
   timeout:
-    description: Change the default timeout time in seconds
+    description: Change the default timeout time in seconds. Default value is 30 seconds.
     required: false
 outputs:
   app_token:
