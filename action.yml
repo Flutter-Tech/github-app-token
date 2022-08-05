@@ -11,9 +11,12 @@ inputs:
   APP_INSTALLATION_ID:
     description: GitHub App installation ID.
     required: true
+  timeout:
+    description: Change the default timeout time in seconds
+    required: false
 outputs:
   app_token:
     description: The installation access token for the GitHub App.
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'node16'
+  main: 'dist/index.js'
