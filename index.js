@@ -7,6 +7,8 @@ const privateKey = core.getInput("APP_PEM");
 const installationId = core.getInput("APP_INSTALLATION_ID");
 const inputTimeout = core.getInput('timeout');
 
+console.log({appId, privateKey, installationId, timeInSeconds});
+
 // Set defaul input to 30 seconds
 let timeout = 30000;
 
