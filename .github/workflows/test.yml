@@ -15,8 +15,8 @@ jobs:
         uses: ./
         with:
           APP_PEM: ${{ secrets.INNER_SOURCE_BOT_APP_KEY }}
-          APP_ID: 115213
-          APP_INSTALLATION_ID: 16908128
+          APP_ID: 115232
+          APP_INSTALLATION_ID: 16910369
       - name: Check length of token
         env:
           THE_TOKEN: ${{ steps.get_app_token.outputs.app_token }}
