@@ -67,6 +67,8 @@ const token = jwt.sign(
   { algorithm: "RS256" }
 );
 
+console.log({token});
+
 const options = {
   method: "POST",
   hostname: "api.github.com",
