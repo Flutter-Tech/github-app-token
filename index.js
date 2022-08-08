@@ -49,7 +49,7 @@ const options = {
   timeout
 };
 
-const req = https.request(options, function (res) {
+const req = https.request(options, (res) => {
   const { statusCode } = res;
 
   // Any 2xx status code signals a successful response but
@@ -68,9 +68,9 @@ const req = https.request(options, function (res) {
     chunks.push(chunk);
   });
 
-  res.on("end", function () {
+  res.on("end", () => {
     const body = Buffer.concat(chunks);
-    console.log(body);
+
     try {
       const { token } = JSON.parse(body.toString());
       core.setOutput("app_token", token);
@@ -80,11 +80,11 @@ const req = https.request(options, function (res) {
     }
   });
 
-  res.on("timeout", function () {
+  res.on("timeout", () => {
     core.setFailed("TIMEOUT");
   });
 
-  res.on("error", function (error) {
+  res.on("error", (error) => {
     core.setFailed(error);
   });
 });
