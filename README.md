@@ -4,17 +4,12 @@ This action retrieves a token for a GitHub app according to its ID, installation
 
 ## Inputs
 
-## `APP_PEM`
-
-**Required** The app's private key in pem format.
-
-## `APP_ID`
-
-**Required** The app's ID.
-
-## `APP_INSTALLATION_ID`
-
-**Required** The app's installation ID.
+| Input               	| Description                                    	 |
+| --------------------- | ------------------------------------------------ |
+| `APP_PEM`.          	| **Required** The app's private key in pem format |
+| `APP_ID`            	| **Required** The app's ID                        |
+| `APP_INSTALLATION_ID` | **Required** The app's installation ID  	       |
+| `timeout`           	| Request timeout in seconds (default: 30)  	     |
 
 ## Outputs
 
