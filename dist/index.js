@@ -7149,11 +7149,11 @@ const req = https.request(options, function (res) {
 
   const chunks = [];
 
-  res.on("data", (chunk) => {
+  res.on("data", function (chunk) {
     chunks.push(chunk);
   });
 
-  res.on("end", () => {
+  res.on("end", function () {
     const body = Buffer.concat(chunks);
     console.log(body);
     try {
@@ -7165,11 +7165,11 @@ const req = https.request(options, function (res) {
     }
   });
 
-  res.on("timeout", () => {
+  res.on("timeout", function () {
     core.setFailed("TIMEOUT");
   });
 
-  res.on("error", (error) => {
+  res.on("error", function (error) {
     core.setFailed(error);
   });
 });
