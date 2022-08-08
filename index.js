@@ -31,7 +31,7 @@ const token = jwt.sign(
     // JWT expiration time (10 minute maximum)
     exp: timeInSeconds + 10 * 60,
     // GitHub App's identifier
-    iss: appId,
+    iss: appId
   },
   privateKey,
   { algorithm: "RS256" }
@@ -44,20 +44,33 @@ const options = {
   headers: {
     "User-Agent": "Flutter-Tech/github-app-token",
     Accept: "application/vnd.github+json",
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${token}`
   },
   timeout
 };
 
 const req = https.request(options, function (res) {
+  const { statusCode } = res;
+
+  // Any 2xx status code signals a successful response but
+  // here we're only checking for 201.
+  if (statusCode !== 201) {
+    const error = new Error(`Request Failed.\nStatus Code: ${statusCode}`);
+    core.setFailed(error);
+    // Consume response data to free up memory
+    res.resume();
+    return;
+  }
+
   const chunks = [];
 
-  res.on("data", function (chunk) {
+  res.on("data", (chunk) => {
     chunks.push(chunk);
   });
 
-  res.on("end", function (chunk) {
+  res.on("end", () => {
     const body = Buffer.concat(chunks);
+    console.log(body);
     try {
       const { token } = JSON.parse(body.toString());
       core.setOutput("app_token", token);
@@ -67,11 +80,11 @@ const req = https.request(options, function (res) {
     }
   });
 
-  res.on("timeout", function () {
+  res.on("timeout", () => {
     core.setFailed("TIMEOUT");
-  })
+  });
 
-  res.on("error", function (error) {
+  res.on("error", (error) => {
     core.setFailed(error);
   });
 });
