@@ -7099,7 +7099,7 @@ let timeout = 30000;
 if (inputTimeout) {
   const value = Number(inputTimeout);
 
-  if (value === NaN || value < 0) {
+  if (Number.isNaN(value) || value < 0) {
     return core.setFailed(
       "Timeout must be a number greater than or equal to 0"
     );
