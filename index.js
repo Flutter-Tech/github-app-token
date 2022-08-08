@@ -56,10 +56,10 @@ const request = (options) =>
 const timeInSeconds = Math.floor(Date.now() / 1000);
 const token = jwt.sign(
   {
-    // issued at time, 20 seconds in the past to allow for clock drift
-    iat: timeInSeconds - 20,
+    // issued at time, 60 seconds in the past to allow for clock drift
+    iat: timeInSeconds - 60,
     // JWT expiration time (10 minute maximum)
-    exp: timeInSeconds + 10 * 60,
+    exp: timeInSeconds + ( 10 * 60 ),
     // GitHub App's identifier
     iss: appId,
   },
@@ -73,7 +73,7 @@ const options = {
   port: 443,
   path: `/app/installations/${installationId}/access_tokens`,
   headers: {
-    Accept: "application/vnd.github.machine-man-preview+json",
+    Accept: "application/vnd.github+json",
     Authorization: "Bearer " + token,
   },
   timeout
