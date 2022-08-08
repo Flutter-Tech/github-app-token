@@ -38,14 +38,15 @@ const token = jwt.sign(
 );
 
 const options = {
-  method: 'POST',
-  hostname: 'api.github.com',
+  method: "POST",
+  hostname: "api.github.com",
   path: `/app/installations/${installationId}/access_tokens`,
   headers: {
-    'User-Agent': 'Flutter-Tech/github-app-token v2',
-    'Accept': 'application/vnd.github+json',
-    'Authorization': `Bearer ${token}`
-  }
+    "User-Agent": "Flutter-Tech/github-app-token",
+    Accept: "application/vnd.github+json",
+    Authorization: `Bearer ${token}`,
+  },
+  timeout
 };
 
 const req = https.request(options, function (res) {
@@ -58,12 +59,17 @@ const req = https.request(options, function (res) {
   res.on("end", function (chunk) {
     const body = Buffer.concat(chunks);
     try {
-      const {token} = JSON.parse(body.toString());
-      core.setOutput("token", token);
+      const { token } = JSON.parse(body.toString());
+      core.setOutput("app_token", token);
+      core.setSecret(token);
     } catch (error) {
       core.setFailed(error);
     }
   });
+
+  res.on("timeout", function () {
+    core.setFailed("TIMEOUT");
+  })
 
   res.on("error", function (error) {
     core.setFailed(error);
