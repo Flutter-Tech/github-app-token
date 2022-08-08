@@ -7092,8 +7092,6 @@ const privateKey = core.getInput("APP_PEM");
 const installationId = core.getInput("APP_INSTALLATION_ID");
 const inputTimeout = core.getInput('timeout');
 
-console.log({appId, privateKey, installationId, inputTimeout});
-
 // Set defaul input to 30 seconds
 let timeout = 30000;
 
@@ -7154,8 +7152,6 @@ const token = jwt.sign(
   { algorithm: "RS256" }
 );
 
-console.log({token});
-
 const options = {
   method: "POST",
   hostname: "api.github.com",
@@ -7163,7 +7159,7 @@ const options = {
   path: `/app/installations/${installationId}/access_tokens`,
   headers: {
     Accept: "application/vnd.github+json",
-    Authorization: "Bearer " + token,
+    Authorization: "token " + token,
   },
   timeout
 };
