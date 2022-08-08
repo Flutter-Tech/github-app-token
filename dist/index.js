@@ -7156,7 +7156,7 @@ const options = {
   method: "POST",
   hostname: "api.github.com",
   port: 443,
-  path: `app/installations/${installationId}/access_token`,
+  path: `/app/installations/${installationId}/access_tokens`,
   headers: {
     Accept: "application/vnd.github.machine-man-preview+json",
     Authorization: "Bearer " + token,
