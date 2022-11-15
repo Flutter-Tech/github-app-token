@@ -23,7 +23,7 @@ It is possible to use this action by simply adding it as one of the step in your
 
 ```
 - name: Step
-  uses: Flutter-Tech/github-app-token@v1
+  uses: Flutter-Tech/github-app-token@v2
   with:
     APP_PEM: ${{ APP_PEM }}
     APP_ID: ${{ APP_ID }}
