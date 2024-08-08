@@ -14,11 +14,17 @@ class BearerAuth(requests.auth.AuthBase):
         r.headers["authorization"] = f"Bearer {self.token}"
         return r
 
-if __name__ == '__main__':
 
-    app_id = os.environ.get('INPUT_APP_ID')
-    app_installation_id = os.environ.get('INPUT_APP_INSTALLATION_ID')
-    app_key = os.environ.get('INPUT_APP_PEM')
+if __name__ == "__main__":
+
+    # Deprecation notice
+    print(
+        "::warning::The 'github-app-token' action is being deprecated. We encourage you to update your workflows to use the official GitHub action, 'create-github-app-token'. This change will ensure continued support and access to the latest features. For detailed instructions and more information, please visit: https://github.com/actions/create-github-app-token. Thank you for your understanding and cooperation!"
+    )
+
+    app_id = os.environ.get("INPUT_APP_ID")
+    app_installation_id = os.environ.get("INPUT_APP_INSTALLATION_ID")
+    app_key = os.environ.get("INPUT_APP_PEM")
 
     time_since_epoch_in_seconds = int(time.time())
     payload = {
