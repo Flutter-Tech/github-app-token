@@ -1,4 +1,12 @@
-# Github App Token action
+# Deprecation notice
+
+**The `github-app-token` action is being deprecated. We encourage you to update your workflows to use the official GitHub action, `create-github-app-token`. This change will ensure continued support and access to the latest features.**
+
+**For detailed instructions and more information, please visit: https://github.com/actions/create-github-app-token**
+
+----
+
+## Github App Token action
 
 This action retrieves a token for a GitHub app according to its ID, installation ID and private key.
 
