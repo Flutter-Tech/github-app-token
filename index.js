@@ -2,6 +2,9 @@ const https = require("node:https");
 const core = require("@actions/core");
 const jwt = require("jsonwebtoken");
 
+// Deprecation notice
+core.warning("The `github-app-token` action is being deprecated. We encourage you to update your workflows to use the official GitHub action, `create-github-app-token`. This change will ensure continued support and access to the latest features. For detailed instructions and more information, please visit: https://github.com/actions/create-github-app-token");
+
 const appId = core.getInput("APP_ID");
 const privateKey = core.getInput("APP_PEM");
 const installationId = core.getInput("APP_INSTALLATION_ID");

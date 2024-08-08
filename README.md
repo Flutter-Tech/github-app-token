@@ -1,8 +1,16 @@
-# Github App Token action
+# 🛑 Deprecation notice 🛑
+
+**The `github-app-token` action is being deprecated. We encourage you to update your workflows to use the official GitHub action, `create-github-app-token`. This change will ensure continued support and access to the latest features.**
+
+**For detailed instructions and more information, please visit: https://github.com/actions/create-github-app-token**
+
+----
+
+### Github App Token action
 
 This action retrieves a token for a GitHub app according to its ID, installation ID and private key.
 
-## Inputs
+#### Inputs
 
 | Input                 | Description                                      |
 | --------------------- | ------------------------------------------------ |
@@ -11,13 +19,13 @@ This action retrieves a token for a GitHub app according to its ID, installation
 | `APP_INSTALLATION_ID` | **Required** The app's installation ID           |
 | `timeout`             | Request timeout in seconds (default: 30).        |
 
-## Outputs
+### Outputs
 
-## `app_token`
+#### `app_token`
 
 The token for the Github app.
 
-## Example usage
+#### Example usage
 
 It is possible to use this action by simply adding it as one of the step in your workflow, like demonstrate in the example below.
 
